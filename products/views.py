@@ -3,11 +3,13 @@ from django.views.generic import ListView, DetailView
 from django.shortcuts import render
 
 from .models import Category, Product, ProductImages, Brand
-from django.db.models import Count
+from django.db.models import Count, Q, F
 
 
 
 def post_list(request):
+    #products = Product.objects.filter(price__range=(30, 50))
+    #products = Product.objects.filter(name__endswith='ay')
     products = Product.objects.all()
     return render(request, "products/test_list.html", {"products":products})
 

@@ -1,4 +1,5 @@
 from distutils.command.upload import upload
+from email.policy import default
 from itertools import product
 from random import choices
 from tabnanny import verbose
@@ -28,9 +29,20 @@ class Product(models.Model):
     category = models.ForeignKey('Category', verbose_name = _("category"), related_name="product_category" , on_delete=models.SET_NULL, null=True, blank=True)
     brand = models.ForeignKey('Brand', verbose_name = _("brand"), related_name="product_brand", on_delete=models.SET_NULL, null=True, blank=True)
     video_url = models.URLField(_("video_url"), max_length=200, null=True, blank=True)
+    quantity = models.IntegerField(default=50)
     
     def __str__(self):
         return self.name
+    
+    def get_avg(self):
+        rate_sum = 0
+        products_review = self.product_review.all()
+        for review in products_review:
+            rate_sum += review.rate
+            print(review.rate)
+        avg = rate_sum / len(products_review)
+        return avg
+        
 
 
 class ProductImages(models.Model):
