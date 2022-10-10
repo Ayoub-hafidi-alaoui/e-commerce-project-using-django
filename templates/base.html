@@ -120,13 +120,13 @@
                         <img src="{{info.logo.url}}" alt="logo">
                     </a>
                     {% if user.is_authenticated %}
-                    <a href="login.html" class="header-widget" title="My Account">
+                    <a href="{% url 'accounts:profile' %}" class="header-widget" title="My Account">
                         {% if user_profile.image %}
                             <img src="{{ user_profile.image.url }}" alt="user">
                         {% else %}
                             <img src="{% static 'images/avatar.png' %}" alt="user">
                         {% endif %}
-                        <span>Join</span>
+                        <span>Profile</span>
                     </a>
                     {% else %}
                         <a href="{% url 'login'  %}" class="header-widget" title="My Account">
@@ -907,7 +907,7 @@
         =======================================-->
         
                 {% block body %}
-                {% endblock %}
+                {% endblock  %}
 
         <!--=====================================
                     INTRO PART START
